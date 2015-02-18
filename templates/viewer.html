@@ -199,16 +199,6 @@
  <div class="span7" style="height:100%">
           <div class="alert alert-info alert-block" ng-class="{hide: not(eq(avg.images.length,0))}">
             <!--button type="button" class="close" data-dismiss="alert" ng-click="$safe_apply()">&times;</button-->
-            <h3>ENTER AN IDEA FOR YOUR AVERAGE</h3>
-	    <div class="wellz">
-              <form name="form" class="form" novalidate>
-	      <input type="text" style="margin-bottom:0px" ng-model="idea">
-	      <button class="btn btn-primary" ng-click="recalc()" type="submit">
-		<img src="/static/icons/averagely_icon16.png" style="margin-bottom:4px;">
-		GO!
-	      </button>
-	      </form>
-	    </div>
 
           </div>
           <div id='thumbnails' ng-class="{'thumbs-with-message': eq(avg.images.length,0), thumbs: not(eq(avg.images.length,0))}" style="relative">
