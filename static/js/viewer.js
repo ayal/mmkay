@@ -94,10 +94,12 @@ window.search = function(q) {
 	window.scope.refresh();
     });
 
-    setTimeout(function(){
-	iii++;
-	window.search();
-    },1000);
+    if (allimages[iii + 1]) {
+	setTimeout(function(){
+	    iii++;
+	    window.search();
+	},1000);
+    }
 
 };
 
