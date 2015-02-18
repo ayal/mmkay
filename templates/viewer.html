@@ -196,26 +196,37 @@
   <!-- END AVERAGE -->
 
   <!-- THUMBNAILS -->
-  <div class="span7" style="height:100%">
-  </div>
+ <div class="span7" style="height:100%">
+          <div class="alert alert-info alert-block" ng-class="{hide: not(eq(avg.images.length,0))}">
+            <!--button type="button" class="close" data-dismiss="alert" ng-click="$safe_apply()">&times;</button-->
+            <h3>ENTER AN IDEA FOR YOUR AVERAGE</h3>
+	    <div class="wellz">
+              <form name="form" class="form" novalidate>
+	      <input type="text" style="margin-bottom:0px" ng-model="idea">
+	      <button class="btn btn-primary" ng-click="recalc()" type="submit">
+		<img src="/static/icons/averagely_icon16.png" style="margin-bottom:4px;">
+		GO!
+	      </button>
+	      </form>
+	    </div>
 
-  <div id='thumbnails' ng-class="{'thumbs-with-message': eq(avg.images.length,0), thumbs: not(eq(avg.images.length,0))}" style="relative">
-    <div ng-repeat="iia in avg.images track by $index" >
-      <div class="thumbwrap">
-        <div class="thumbnail">
-          <i title="toggle image mute" style="float:left;cursor:pointer" ng-class="{'icon-eye-close': iia.muted, 'icon-eye-open': not(iia.muted)}" \
-             ng-click="iia.muted ? avg.unmute(iia) : avg.mute(iia); refresh()"></i>
-          <i title="remove image" class="icon-remove" style="float:right;cursor:pointer" ng-click="avg.remove(iia); refresh()"></i>
-          <img ng-src="{{iia.thumbnail.src}}" style="clear:both"/>
+          </div>
+          <div id='thumbnails' ng-class="{'thumbs-with-message': eq(avg.images.length,0), thumbs: not(eq(avg.images.length,0))}" style="relative">
+            <div ng-repeat="iia in avg.images track by $index" >
+              <div class="thumbwrap">
+                <div class="thumbnail">
+                  <i title="toggle image mute" style="float:left;cursor:pointer" ng-class="{'icon-eye-close': iia.muted, 'icon-eye-open': not(iia.muted)}" \
+                     ng-click="iia.muted ? avg.unmute(iia) : avg.mute(iia); refresh()"></i>
+                  <i title="remove image" class="icon-remove" style="float:right;cursor:pointer" ng-click="avg.remove(iia); refresh()"></i>
+                  <img ng-src="{{iia.thumbnail.src}}" style="clear:both"/>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    </div>
-</div>
-  <!-- END THUMBNAILS -->
+        <!-- END THUMBNAILS -->
 
-</div> <!-- /row -->
-</div> <!-- /container -->
-
+      </div> <!-- /row -->
+    </div> <!-- /container -->
 </body>
 </html>
