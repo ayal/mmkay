@@ -1,0 +1,43 @@
+<html dir=rtl>
+<head>
+<title>אתר הכנסת </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+.TopBarGrayStripe {background-color:#2F393C; height: 20px;}
+.BannerKnesset {background-image:url(http://main.knesset.gov.il/PublishingImages/pictureA.jpg); background-repeat:no-repeat; background-position: center left; height: 146px; background-color: #f2f2f2; width: 100%;  }
+.BannerKnesset2 {background-image:url(http://main.knesset.gov.il/PublishingImages/pictureB.jpg); background-repeat:no-repeat; background-position: center left; height: 146px; background-color: #f2f2f2; width: 100%;  }
+.FooterSemel {background-image: url(http://main.knesset.gov.il/PublishingImages/israelmenora.png); background-repeat: no-repeat; background-position: center top; padding-top: 45px; font-family: Arial; font-size: 11px; color: #2f393c; }
+.FooterBG {background-image: url(images/FooterBG.png);background-repeat: repeat; height: 391px;width: 100%;}
+</style>
+</head> 
+<body style="background-image:url(images/bgpattern.png);background-repeat:repeat;margin: 0px 0px 0px 0px;">
+<table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+<tr><td class="TopBarGrayStripe">&nbsp;</td></tr>
+</table>
+<!-- Picture of the Knesset  -->
+<table class="BannerKnesset" cellpadding="0" cellspacing="0">
+<tr><td>&nbsp;</td>
+<td style="width:1000px;" valign="middle" class="BannerKnesset2"><img src="http://main.knesset.gov.il/PublishingImages/knessetlogo.png" alt="" /></td>
+<td>&nbsp;</td>
+</tr>
+</table>
+<div style="text-align:center;margin-top:150px;direction:rtl;font-weight:bold;font-family:Arial;font-size:18px;">לעמוד אליו הגעת קיימת בעיה טכנית. </div>
+<div style="text-align:center;direction:rtl;font-weight:bold;font-family:Arial;font-size:16px;"><a href="http://main.knesset.gov.il">לעמוד הבית של אתר הכנסת</a> </div>
+<br /><div style="text-align:center;direction:ltr;font-size:18px;font-weight:bold;font-family:Arial;">The page you requested is experiencing technical problems.</div>
+<div style="text-align:center;direction:ltr;font-size:16px;font-weight:bold;font-family:Arial;"><a href="http://www.knesset.gov.il/main/eng/home.asp">To the Knesset homepage in English</a>
+<h3><br>The incident ID is: N/A.</h3>
+</div>
+<table cellpadding="0" cellspacing="0" class="FooterBG" >
+<tr>
+<td align="center">
+<div align="center" class="FooterSemel">
+© 2013 כל הזכויות שמורות למדינת ישראל - הכנסת או לצדדים שלישיים, כמפורט בקישור<br />
+נשמח לקבל את הערותיכם והצעותיכם לכתובת: <a href="mailto:feedback@knesset.gov.il" style="text-decoration:underline !important">feedback@knesset.gov.il</a>
+</div>
+<div><br /></div>
+</td>
+</tr>
+</table>
+<div><br /></div>
+</body>
+</html>

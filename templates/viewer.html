@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html  ng-app="averagely" ng-csp>
+  <head>
+    <title>Averagely</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <!-- <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
+    <link href="/static/lib/bootstrap/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="/static/lib/bootstrap/css/font-awesome.css" rel="stylesheet">
+    <link href="/static/css/viewer.css" rel="stylesheet" media="screen">
+    <link href="/static/lib/tagmanager/bootstrap-tagmanager.css" rel="stylesheet" media="screen">
+    <link rel="shortcut icon" href="/static/icons/averagely_icon16.png">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-42502702-1');
+      ga('send', 'pageview');      
+    </script>
+
+    <script src="/static/lib/angular.min.js"></script>
+    <script src="/static/lib/jquery.min.js"></script>
+    <script src="/static/lib/underscore-min.js"></script>
+    <script src="/static/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/lib/pixastic.full.min.js"></script>
+    <script src="/static/lib/caman.full.min.js"></script>
+    <script src="/static/lib/tagmanager/bootstrap-tagmanager.js"></script>
+    <script src="/static/js/engine.js"></script>
+    <script src="/static/js/viewer.js"></script>
+
+  </head>
+  <body>
+    <div class="container-fluid" ng-controller="MainControl">
+
+
+      <!-- NAVBAR -->
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="brand" href="#"><img src="/static/icons/averagely_icon16.png" style="margin-bottom:4px;"> AVERAGELY</a>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- PUBLISH DIALOG -->
+<div id="publish-dialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publish-dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Publish your average!</h3>
+  </div>
+  <div class="modal-body">
+    <div class="thumb_crop pull-right">
+      <img ng-src="{{url}}">
+    </div>
+    <form name="form" class="form" novalidate>
+      <div class="control-group">
+        <label class="control-label" for="inputTitle">Average Title</label>
+        <div class="controls">
+          <input type="text" ng-model="title" name="inputTitle" required id="inputTitle" placeholder="Title">
+        </div>
+        <label class="control-label" for="inputName">Name</label>
+        <div class="controls">
+          <input type="text" ng-model="author" id="inputName" name="inputName" required placeholder="Your Artistic Name">
+        </div>
+        <label class="control-label" for="inputEmail">Email</label>
+        <div class="controls">
+          <input type="email" ng-model="email" id="inputEmail" name="inputEmail" placeholder="We will never spam you!">
+          <span ng-show="form.inputEmail.$dirty && form.inputEmail.$invalid" style="font-size:9px;color:red">Invalid Email</span>
+        </div>
+        <label class="control-label" for="inputTags">Tags</label>
+        <input type="text" name="tags" placeholder="Tags" id="inputTags" class="tm-input"/>
+      </div>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">cancel</button>
+    <button class="btn btn-success" ng-disabled="form.$invalid" ng-click="publish();">
+      <i id="pub-spinner" class="icon-asterisk icon-large icon-spin" style="display:none"></i>
+      <i class="icon-cloud-upload"></i> publish!
+    </button>
+  </div>
+</div>
+<!-- END PUBLISH DIALOG -->
+
+<div class="row-fluid">
+
+  <!-- AVERAGE -->
+  <div id="main" class="avgedit span5">
+    <div style="width:100%">
+      <div id="results" class="thumbnail">
+        <div>
+          <div id="main_image_container" class="well well-small" style="margin-bottom:0px;position:relative;">
+            <img id="image" style="display: inline-block;" ng-src="{{url}}">
+            <i id="spinner" class="icon-asterisk icon-large icon-spin"></i>
+          </div>
+
+          <!-- SUB-IMAGE CONTROLS -->
+          <div class="row-fluid">
+            <span class="span2">
+              <span title="images in average (unmuted/total)"><i class="icon-picture"></i>&nbsp;{{avg.count}}/{{avg.images.length}}</span>
+            </span>
+            <span class="span3">
+              <span title="image size"><i class="icon-crop"></i>&nbsp;{{avg.size()[0]}}x{{avg.size()[1]}}</span>
+            </span>
+            <span class="span1 muted" style="text-align:center;">
+              <!--i class="icon-signal"></i>
+                  <i class="icon-adjust"></i>
+                  <i class="icon-beaker"></i-->
+            </span>
+            <span class="span6" style="text-align:right;">
+              <button class="btn btn-mini" type="button" ng-click="avg.reset_post_processing(); refresh();">
+                <i class="icon-reply"></i> reset
+              </button>
+              <button class="btn btn-mini" type="button" data-toggle="button" ng-class="{'btn-success': histo.doit}" ng-click="histo.doit = !histo.doit; refresh();">
+                <i class="icon-signal"></i> histo.
+              </button>
+              <div class="btn-group dropup">
+                <button class="btn btn-mini dropdown-toggle" type="button" data-toggle="dropdown" ng-class="{'btn-warning': not(eq(null, avg.current_filter))}">
+                  <i class="icon-camera"></i> filter
+                </button>
+                <ul class="dropdown-menu" style="text-align:left;">
+                  <li ng-repeat="preset in avg.PRESETS" id="{{preset.name}}" ng-click="avg.set_filter(preset); refresh();" style="position:relative">
+                    <a href="#">
+                      <i class="icon-ok" ng-class="{hide: not(eq(preset.name, avg.current_filter.name)) }" style="position:absolute;top:7px;left:7px;"></i>
+                      <span>&nbsp;{{preset.title}}</span></a>
+                  </li>
+                  <li class="divider"></li>
+                  <li id="no-filter" ng-click="avg.set_filter(null); refresh();" style="position:relative">
+                    <a>
+                      <i class="icon-ok" ng-class="{hide: not(eq(null, avg.current_filter)) }" style="position:absolute;top:7px;left:7px;"></i>
+                      <span>&nbsp;none</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <button id="adjust" class="btn btn-mini" type="button" onclick="$('.collapz').toggle();" ng-click="editing = !editing">
+                adjust
+                <i id="edit-collapse-caret" ng-class="{'icon-chevron-down': not(editing), 'icon-chevron-up': editing}"></i>
+              </button>
+            </span>
+          </div>
+          <!-- END SUB-IMAGE CONTROLS -->
+
+          <div id="post-processing" class="collapz hide">
+            <div>
+              <!--div class="row-fluid" style="margin-bottom:10px">
+                  <button id="reset" class="btn span4" type="button" ng-click="avg.reset_post_processing(); refresh();">
+                    <i class="icon-rotate-left"></i> reset
+                  </button>
+
+                  <button id="histo" class="btn span4 btn-success" type="button" data-toggle="button" ng-click="histo.doit = !histo.doit; refresh() ">
+                    <i class="icon-signal"></i> histogram
+                  </button>
+
+                  <div class="btn-group dropup span4">
+
+                    <button id="filter" class="btn dropdown-toggle span12" ng-class="{'btn-warning': not(eq(preset.name, avg.current_preset.name))}" data-toggle="dropdown" type="button">
+                      <i class="icon-beaker"></i> filter <i class="icon-chevron-up"></i>
+                    </button>
+
+                    <ul class="dropdown-menu pull-right">
+                      <li ng-repeat="preset in avg.PRESETS" id="{{preset.name}}" ng-click="avg.current_preset = preset; refresh();" style="position:relative">
+                        <a href="#">
+                          <i class="icon-ok" ng-class="{hide: not(eq(preset.name, avg.current_preset.name)) }" style="position:absolute;top:7px;left:7px;"></i>
+                          <span>&nbsp;{{preset.title}}</span></a>
+                      </li>
+                      <li class="divider"></li>
+                      <li id="no-filter" ng-click="avg.current_preset = null; refresh();" style="position:relative">
+                        <a>
+                          <i class="icon-ok" ng-class="{hide: not(eq(null, avg.current_preset)) }" style="position:absolute;top:7px;left:7px;"></i>
+                          <span>&nbsp;none</span>
+                        </a>
+                      </li>
+                    </ul>
+
+                  </div>
+</div-->
+
+              <div class="row-fluid" ng-repeat="(adjustment, value) in avg.adjustments">
+                <span class="span2" style="text-align:right;">{{adjustment}}</span>
+                <span class="span9">
+                  <input id="{{adjustment}}" type="range" min="-100" max="100" step="1" value="{{value.v}}" style="width:100%" ng-model="value.v" ng-change="avg._invalidate_cache(1); bouncy_refresh();">
+                </span>
+                <span id="brightness-value" class="span1">{{value.v}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END AVERAGE -->
+
+  <!-- THUMBNAILS -->
+  <div class="span7" style="height:100%">
+  </div>
+
+  <div id='thumbnails' ng-class="{'thumbs-with-message': eq(avg.images.length,0), thumbs: not(eq(avg.images.length,0))}" style="relative">
+    <div ng-repeat="iia in avg.images track by $index" >
+      <div class="thumbwrap">
+        <div class="thumbnail">
+          <i title="toggle image mute" style="float:left;cursor:pointer" ng-class="{'icon-eye-close': iia.muted, 'icon-eye-open': not(iia.muted)}" \
+             ng-click="iia.muted ? avg.unmute(iia) : avg.mute(iia); refresh()"></i>
+          <i title="remove image" class="icon-remove" style="float:right;cursor:pointer" ng-click="avg.remove(iia); refresh()"></i>
+          <img ng-src="{{iia.thumbnail.src}}" style="clear:both"/>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+  <!-- END THUMBNAILS -->
+
+</div> <!-- /row -->
+</div> <!-- /container -->
+
+</body>
+</html>

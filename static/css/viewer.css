@@ -1,0 +1,112 @@
+.download-bar {
+    width:105%;
+    height:50px;
+    font-size:20px;
+    line-height:40px;
+    background-color:rgb(255, 243, 164);
+    text-align:center;
+    border-bottom:2px solid black;
+    margin-left:-20px;
+    margin-bottom:5px;
+}
+#spinner {
+    position:absolute;
+    top:42%;
+    left:43%;
+    font-size:50px;
+    z-index:100000;
+    color:whiteSmoke;
+}
+
+body {
+
+}
+
+.modal-body {
+    overflow-y:visible;
+}
+
+.thumbs {
+    overflow: auto;
+}
+html,body {
+    overflow:hidden;
+}
+html, body, .container-fluid > .row-fluid, .avgedit, .avgedit .thumbnail, .avgedit .thumbnail > div  {
+    height:99%;
+}
+.container-fluid {
+height: 87%;
+}
+
+.thumbs-with-message {
+    height: 87%;
+}
+
+.thumbs {
+    height: 97%;
+}
+
+#post-processing.in{
+    overflow:visible;
+}
+#results > div > div.row-fluid {
+    margin-top: 10px;
+}
+
+/*.avgedit {
+    text-align: center;
+}*/
+
+#main_image_container {
+    text-align: center;
+}
+
+.avgedit > div {
+    display: inline-block;
+}
+
+.thumbwrap {
+    height: 140px;
+    width:110px;
+    float:left;
+    margin-left:10px;
+}
+
+.thumbnail {
+
+}
+
+.avgedit .thumbnail img {
+    height: 80%;
+}
+
+.icon-eye-close~img {
+    opacity: 0.3;
+}
+
+.loading-overlay {
+    position:absolute;
+    z-index:99999;
+    background: black;
+    opacity: 0.5;
+    height: 100%;
+    width: 100%;
+    background-image: url('icons/averagely_icon500_gutter2.png');
+    display:none;
+    background-repeat: no-repeat;
+    background-position: 60% 60%;
+}
+
+/*#filters-dropdown {
+    left: -50%;
+}*/
+
+.thumb_crop {
+    min-width: 200px;
+    width: 200px;
+    height: 134px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
