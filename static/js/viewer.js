@@ -141,7 +141,7 @@ app.controller('MainControl', ['$scope', function($scope) {
 	loadparty: function(p){
 	    window.avg.images = []
 	    iii = 0;
-	    window.search(_.map($scope.mks.parties[p], function(x){return x.img.replace(/http...www.knesset.gov.il.mk.images.members./gim,'/static/images/mks/').replace(/-s/gim,'')}));
+	    window.search(_.map($scope.mks.parties[p], function(x){return x.img.replace(/http...www.knesset.gov.il.mk.images.members./gim,'/mmkay/static/images/mks/').replace(/-s/gim,'')}));
 	}};
 
     $scope.mks.parties = _.groupBy(allimages,'p');
