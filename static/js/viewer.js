@@ -160,7 +160,7 @@ app.controller('MainControl', ['$scope', function($scope) {
 	    window.search(_.map($scope.mks.parties[p], function(x){return x.img.replace(/http...www.knesset.gov.il.mk.images.members./gim,'/mmkay/static/images/mks/').replace(/-s/gim,'')}));
 	}};
 
-    $scope.mks.parties = _.union(_.groupBy(allimages,'p'), _.groupBy(allimages, 'g'));
+    $scope.mks.parties = _.extend(_.groupBy(allimages,'p'), _.groupBy(allimages, 'g'));
     
 
     $scope.isChrome = isChrome;
