@@ -139,7 +139,23 @@ app.controller('MainControl', ['$scope', function($scope) {
 
     $scope.mks = {
 	loadparty: function(p){
-	    window.avg.images = []
+
+    window.avg.L = new Int32Array(CACHED_IMAGE_SIZE);
+    window.avg.A = new Int32Array(CACHED_IMAGE_SIZE);
+    window.avg.B = new Int32Array(CACHED_IMAGE_SIZE);
+    window.avg.length = CACHED_IMAGE_SIZE;
+    window.avg.count = 0;
+    window.avg.width_sum = 0;
+    window.avg.height_sum = 0;
+    window.avg.images = [];
+    // url > image cache
+    window.avg.url_to_image = {};
+
+    // rendering cache
+    window.avg._render_cache = [null,null,null];
+
+
+	    window.avg.images = [];
 	    iii = 0;
 	    window.search(_.map($scope.mks.parties[p], function(x){return x.img.replace(/http...www.knesset.gov.il.mk.images.members./gim,'/mmkay/static/images/mks/').replace(/-s/gim,'')}));
 	}};
