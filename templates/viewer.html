@@ -145,6 +145,14 @@
           </div>
           <!-- END SUB-IMAGE CONTROLS -->
 
+
+	  <div>
+	    <div ng-repeat="(party, mkz) in mks.parties" >
+	      <a ng-click="mks.loadparty('{{party}}')" >{{party}}</a>
+	    </div>
+	  </div>
+
+
           <div id="post-processing" class="collapz hide">
             <div>
               <!--div class="row-fluid" style="margin-bottom:10px">
@@ -193,12 +201,6 @@
       </div>
     </div>
   </div>
-
-   <div>
-     <div ng-repeat="(party, mkz) in mks.parties" >
-       <a ng-click="mks.loadparty('{{party}}')" >{{party}}</a>
-     </div>
-   </div>
 
   <!-- END AVERAGE -->
 
