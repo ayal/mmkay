@@ -195,8 +195,17 @@
   </div>
   <!-- END AVERAGE -->
 
+
   <!-- THUMBNAILS -->
  <div class="span7" style="height:100%">
+   <div>
+     parties
+     <div ng-repeat="(party, mkz) in mks.parties" >
+       <a ng-click="mks.loadparty('{{party}}')" >{{party}}</a>
+     </div>
+   </div>
+
+
           <div class="alert alert-info alert-block" ng-class="{hide: not(eq(avg.images.length,0))}">
             <!--button type="button" class="close" data-dismiss="alert" ng-click="$safe_apply()">&times;</button-->
 
